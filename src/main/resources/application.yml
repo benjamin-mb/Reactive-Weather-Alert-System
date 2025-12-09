@@ -1,0 +1,16 @@
+spring:
+  application:
+   name: programacionReactivaProyect
+  # Configuraci�n exclusiva para conectividad REACTIVA (R2DBC)
+  r2dbc:
+    # URL con el prefijo r2dbc:mysql:// (de Asyncer IO/r2dbc-mysql driver)
+    url: r2dbc:mysql://localhost:3306/reactiveproyect?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: Developer123.
+
+  # Deshabilita expl�citamente el auto-configurador de DataSource JDBC tradicional
+  # para asegurar que Spring Boot no intente configurar conexiones bloqueantes si no las necesitas.
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
