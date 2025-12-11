@@ -1,18 +1,39 @@
 package com.example.programacionReactivaProyect.Domain.Model;
 
-import jakarta.validation.constraints.Email;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Table(name = "user")
+import java.time.LocalDateTime;
+
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class User {
 
-    @Id
-    Integer id;
+    private Integer id;
+    private String name;
+    private String email;
+    private String phone;
+    private String password;
+    private boolean emailNotifications;
+    private boolean smsNotifications;
+    private boolean pushNotifications;
+    private LocalDateTime createdAt;
 
-    String name;
-
-    @Email
-    String email;
-
+    public User(String name, String email,
+                String phone, String password,
+                boolean emailNotifications,
+                boolean smsNotifications,
+                boolean pushNotifications) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.emailNotifications = emailNotifications;
+        this.smsNotifications = smsNotifications;
+        this.pushNotifications = pushNotifications;
+        this.createdAt = LocalDateTime.now();
+    }
 }
