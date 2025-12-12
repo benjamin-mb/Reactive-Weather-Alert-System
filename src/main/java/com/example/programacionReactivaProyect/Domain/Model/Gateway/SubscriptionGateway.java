@@ -10,7 +10,7 @@ import java.util.List;
 public interface SubscriptionGateway {
 
     Mono<Subscription>suscribeToCity(Subscription suscription);
-    Flux<List<Subscription>>getSubscriptions(String email);
+    Flux<Subscription>getSubscriptions(String email);
     Mono<Subscription>updateAlertThresholds(Integer id,BigDecimal maxTemp,
      BigDecimal minTemp,BigDecimal maxWind);
     Mono<Void>deleteSubscription(Integer id);

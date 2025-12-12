@@ -1,6 +1,6 @@
 package com.example.programacionReactivaProyect.Domain.Model.Gateway;
 
-import com.example.programacionReactivaProyect.Domain.DTO.WeatherAnswer;
+import com.example.programacionReactivaProyect.Domain.Model.WeatherAnswer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

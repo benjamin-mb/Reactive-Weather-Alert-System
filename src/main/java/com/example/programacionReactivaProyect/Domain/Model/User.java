@@ -36,4 +36,18 @@ public class User {
         this.pushNotifications = pushNotifications;
         this.createdAt = LocalDateTime.now();
     }
+
+    public User(String name, String email,
+                String phone, String password
+               ) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.emailNotifications = false;
+        this.smsNotifications = false;
+        this.pushNotifications = false;
+        this.createdAt = LocalDateTime.now();
+    }
+
 }

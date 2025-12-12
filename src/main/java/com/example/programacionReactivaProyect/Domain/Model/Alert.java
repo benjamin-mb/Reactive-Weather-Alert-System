@@ -17,10 +17,10 @@ public class Alert {
     private Integer idSubscription;
     private String city;
     private AlertType alertType;
-    private DecimalFormat temperature;
-    private DecimalFormat feeling;
+    private BigDecimal temperature;
+    private BigDecimal feeling;
     private Integer humidity;
-    private DecimalFormat windSpeed;
+    private BigDecimal windSpeed;
     private Integer pressure;
     private String description;
     private String message;
@@ -29,8 +29,8 @@ public class Alert {
     private LocalDateTime createdAt;
 
     public Alert(Integer idUser, Integer idSubscription, String city, AlertType alertType,
-                 Integer humidity, DecimalFormat temperature, DecimalFormat feeling,
-                 DecimalFormat windSpeed, String message, String description,
+                 Integer humidity, BigDecimal temperature, BigDecimal feeling,
+                 BigDecimal windSpeed, String message, String description,
                  Integer pressure, boolean read, boolean notified, LocalDateTime createdAt) {
         this.idUser = idUser;
         this.idSubscription = idSubscription;
