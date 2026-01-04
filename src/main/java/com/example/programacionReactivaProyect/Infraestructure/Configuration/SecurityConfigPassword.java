@@ -1,4 +1,4 @@
-package com.example.programacionReactivaProyect.Config;
+package com.example.programacionReactivaProyect.Infraestructure.Configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

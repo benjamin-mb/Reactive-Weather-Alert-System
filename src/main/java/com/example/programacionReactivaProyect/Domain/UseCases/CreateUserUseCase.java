@@ -1,7 +1,7 @@
 package com.example.programacionReactivaProyect.Domain.UseCases;
 
 import com.example.programacionReactivaProyect.Domain.DTO.CreateUserDto;
-import com.example.programacionReactivaProyect.Domain.Exceptions.EmailOnUseException;
+import com.example.programacionReactivaProyect.Domain.Model.Gateway.PasswordEncoderGateway;
 import com.example.programacionReactivaProyect.Domain.Model.Gateway.UserGateway;
 import com.example.programacionReactivaProyect.Domain.Model.User;
 import reactor.core.publisher.Mono;
@@ -11,18 +11,22 @@ import java.time.LocalDateTime;
 public class CreateUserUseCase {
 
     private final UserGateway userGateway;
+    private final PasswordEncoderGateway passwordEncoderGateway;
 
-    public CreateUserUseCase(UserGateway userGateway) {
+    public CreateUserUseCase(UserGateway userGateway, PasswordEncoderGateway passwordEncoderGateway) {
         this.userGateway = userGateway;
+        this.passwordEncoderGateway = passwordEncoderGateway;
     }
 
     public Mono<User>createUser(CreateUserDto createUserDto){
        return validation(createUserDto)
-               .flatMap(userToSave -> userGateway.getByEmail(userToSave.getEmail())
-               .flatMap(userExist->
-                       Mono.<User>error(new IllegalArgumentException("Email already registered"))
-                               .switchIfEmpty(Mono.defer(()->userGateway.save(userToSave)))
-               ));
+               .flatMap(validUser->
+                       passwordEncoderGateway.passwordEncode(validUser.getPassword())
+               .map(encodedPassword->{
+                   validUser.setPassword(encodedPassword);
+                   return validUser;
+               })
+               ).flatMap(userGateway::save);
 
     }
 
@@ -36,19 +40,24 @@ public class CreateUserUseCase {
         if (createUserDto.getPassword()==null || createUserDto.getPassword().isBlank()){
            return Mono.error(()->new IllegalStateException("Password can't be blank"));
         }
+        boolean passwordCheck=checkPassword(createUserDto.getPassword());
+        if (passwordCheck==false){
+            return Mono.error(()->new IllegalArgumentException("Password does not match the requirements"));
+        }
         if (createUserDto.getEmail()==null || createUserDto.getEmail().isBlank()){
             return Mono.error(()->new IllegalStateException("Name can't be blank"));
         }
-
+        String password=createUserDto.getPassword().trim();
         User user=new User(createUserDto.getName(),createUserDto.getEmail(),
-                createUserDto.getPhone(),createUserDto.getPassword(),
+                createUserDto.getPhone(),password,
                 createUserDto.isEmailNotifications(), createUserDto.isSmsNotifications(),
-                createUserDto.isPushNotifications());
+                createUserDto.isPushNotifications()
+                );
 
         return Mono.just(user);
     }
 
-    private Boolean checkPassword(String password){
+    private boolean checkPassword(String password){
         if (password.length()<8){
             return false;
         }
@@ -58,6 +67,7 @@ public class CreateUserUseCase {
             return false;
         }
         else {
+
             return true;
         }
     }

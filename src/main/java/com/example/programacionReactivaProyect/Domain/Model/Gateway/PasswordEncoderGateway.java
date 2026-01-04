@@ -1,5 +1,7 @@
 package com.example.programacionReactivaProyect.Domain.Model.Gateway;
 
+import reactor.core.publisher.Mono;
+
 public interface PasswordEncoderGateway {
-    public void passwordEncode(String password);
+    public Mono<String> passwordEncode(String password);
 }

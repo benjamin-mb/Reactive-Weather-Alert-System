@@ -50,4 +50,17 @@ public class User {
         this.createdAt = LocalDateTime.now();
     }
 
+    public User(String name, String email, String phone, boolean emailNotifications, boolean smsNotifications, boolean pushNotifications) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.emailNotifications = emailNotifications;
+        this.smsNotifications = smsNotifications;
+        this.pushNotifications = pushNotifications;
+        this.createdAt = createdAt;
+    }
+
+    public User(String name, String email, String phone, String password, Object o, boolean emailNotifications, boolean smsNotifications, boolean pushNotifications) {
+    }
 }
+
