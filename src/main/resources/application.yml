@@ -15,7 +15,7 @@ spring:
 openweathermap:
   api:
     key: ${b9cecd47a9f2e6c426920af023db37f2}
-    base-url: http://api.openweathermap.org/data/2.5
+    base-url: http://api.openweathermap.org
     timeout: 5000
     max-retries: 3
     rate-limit:

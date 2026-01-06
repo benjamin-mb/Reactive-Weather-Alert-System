@@ -7,5 +7,5 @@ import reactor.core.publisher.Mono;
 public interface UserGateway {
     Mono<User>save(User user);
     Mono<User>getByEmail(String email);
-
+    Mono<User>getById(Integer id);
 }
