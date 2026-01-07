@@ -2,10 +2,12 @@ package com.example.programacionReactivaProyect.Infraestructure.Adapters.Mapper;
 
 import com.example.programacionReactivaProyect.Domain.Model.User;
 import com.example.programacionReactivaProyect.Infraestructure.Adapters.Entity.UserEntity;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 
+@Component
 public class UserMapper {
 
     public Mono<User> mapToDomain(UserEntity userEntity){

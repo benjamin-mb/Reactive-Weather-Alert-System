@@ -4,8 +4,11 @@ import com.example.programacionReactivaProyect.Domain.Model.Gateway.UserGateway;
 import com.example.programacionReactivaProyect.Domain.Model.User;
 import com.example.programacionReactivaProyect.Infraestructure.Adapters.Entity.UserEntity;
 import com.example.programacionReactivaProyect.Infraestructure.Adapters.Mapper.UserMapper;
+import org.springframework.stereotype.Repository;
+
 import reactor.core.publisher.Mono;
 
+@Repository
 public class UserRepositoryImpl implements UserGateway {
 
      private  final UserMapper mapper;
