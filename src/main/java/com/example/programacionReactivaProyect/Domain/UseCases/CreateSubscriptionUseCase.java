@@ -3,6 +3,7 @@ package com.example.programacionReactivaProyect.Domain.UseCases;
 import com.example.programacionReactivaProyect.Domain.Exceptions.LocationNotAvailable;
 import com.example.programacionReactivaProyect.Domain.Exceptions.UserNotFoundException;
 import com.example.programacionReactivaProyect.Domain.Model.Gateway.LocationApiGateway;
+import com.example.programacionReactivaProyect.Domain.Model.Gateway.SubscriptionGateway;
 import com.example.programacionReactivaProyect.Domain.Model.Gateway.UserGateway;
 import com.example.programacionReactivaProyect.Domain.Model.Subscription;
 import reactor.core.publisher.Mono;
@@ -11,13 +12,22 @@ import java.math.BigDecimal;
 
 public class CreateSubscriptionUseCase {
 
+    private final SubscriptionGateway subscriptionGateway;
     private final UserGateway userGateway;
     private final LocationApiGateway locationGateway;
-    public CreateSubscriptionUseCase(UserGateway userGateway, LocationApiGateway locationGateway) {
+    public CreateSubscriptionUseCase(SubscriptionGateway subscriptionGateway, UserGateway userGateway, LocationApiGateway locationGateway) {
+        this.subscriptionGateway = subscriptionGateway;
         this.userGateway = userGateway;
         this.locationGateway = locationGateway;
     }
 
+    private Mono<Subscription>execute(Subscription subscription){
+        return validation(subscription)
+                .flatMap(s->gettingLocationValidated(s))
+                .flatMap()
+    }
+
+    private
     private Mono<Subscription> gettingLocationValidated(Subscription subscription){
         return locationGateway.cityDiscover(subscription.getCity())
                 .switchIfEmpty(Mono.error(new LocationNotAvailable("The location "+subscription.getCity()+" was not found")))
