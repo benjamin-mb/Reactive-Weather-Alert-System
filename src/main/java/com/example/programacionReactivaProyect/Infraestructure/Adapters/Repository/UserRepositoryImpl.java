@@ -2,7 +2,6 @@ package com.example.programacionReactivaProyect.Infraestructure.Adapters.Reposit
 
 import com.example.programacionReactivaProyect.Domain.Model.Gateway.UserGateway;
 import com.example.programacionReactivaProyect.Domain.Model.User;
-import com.example.programacionReactivaProyect.Infraestructure.Adapters.Entity.UserEntity;
 import com.example.programacionReactivaProyect.Infraestructure.Adapters.Mapper.UserMapper;
 import org.springframework.stereotype.Repository;
 
@@ -12,29 +11,29 @@ import reactor.core.publisher.Mono;
 public class UserRepositoryImpl implements UserGateway {
 
      private  final UserMapper mapper;
-     private final UserRepository userRepository;
+     private final UserRD2BCRepository userRD2BCRepository;
 
-    public UserRepositoryImpl(UserMapper mapper, UserRepository userRepository) {
+    public UserRepositoryImpl(UserMapper mapper, UserRD2BCRepository userRD2BCRepository) {
         this.mapper = mapper;
-        this.userRepository = userRepository;
+        this.userRD2BCRepository = userRD2BCRepository;
     }
 
     @Override
     public Mono<User> save(User user) {
        return mapper.mapToEntity(user)
-               .flatMap(userRepository::save)
+               .flatMap(userRD2BCRepository::save)
                .flatMap(mapper::mapToDomain);
     }
 
     @Override
     public Mono<User> getByEmail(String email) {
-        return userRepository.findByEmail(email)
+        return userRD2BCRepository.findByEmail(email)
                 .flatMap(mapper::mapToDomain);
     }
 
     @Override
     public Mono<User> getById(Integer id) {
-        return userRepository.findById(id)
+        return userRD2BCRepository.findById(id)
                 .flatMap(mapper::mapToDomain);
     }
 }

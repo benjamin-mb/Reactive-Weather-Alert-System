@@ -6,6 +6,6 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;
 
 
-public interface UserRepository extends ReactiveCrudRepository<UserEntity,Integer> {
+public interface UserRD2BCRepository extends ReactiveCrudRepository<UserEntity,Integer> {
     Mono<UserEntity>findByEmail(String email);
 }

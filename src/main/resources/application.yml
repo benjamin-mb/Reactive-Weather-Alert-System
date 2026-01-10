@@ -1,3 +1,5 @@
+server:
+  port: 8087
 spring:
   application:
    name: programacionReactivaProyect
@@ -14,7 +16,7 @@ spring:
 
 openweathermap:
   api:
-    key: ${b9cecd47a9f2e6c426920af023db37f2}
+    key: b9cecd47a9f2e6c426920af023db37f2
     base-url: http://api.openweathermap.org
     timeout: 5000
     max-retries: 3
