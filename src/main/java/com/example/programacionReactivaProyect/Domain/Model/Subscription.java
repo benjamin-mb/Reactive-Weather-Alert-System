@@ -21,12 +21,12 @@ public class Subscription {
     private BigDecimal maxTemp;
     private BigDecimal minTemp;
     private BigDecimal maxWind;
-    private boolean active;
+    private Boolean active;
     private LocalDateTime createdAt;
 
         public Subscription(Integer idUser, String city, String country, BigDecimal lat,
                         BigDecimal lon, BigDecimal maxTemp, BigDecimal minTemp,
-                        BigDecimal maxWind, boolean active) {
+                        BigDecimal maxWind, Boolean active) {
         this.idUser = idUser;
         this.city = city;
         this.country = country;

@@ -8,8 +8,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface SubscriptionGateway {
-
-    Flux<Subscription>getSubscriptions(String email);
+    Mono<Subscription>save(Subscription subscription);
+    Flux<Subscription>getSubscriptions(Integer userId);
     Mono<Subscription>updateAlertThresholds(Integer id,BigDecimal maxTemp,
      BigDecimal minTemp,BigDecimal maxWind);
     Mono<Subscription>getSubscriptionByIdUserAndCity(Integer idUser,String city);
