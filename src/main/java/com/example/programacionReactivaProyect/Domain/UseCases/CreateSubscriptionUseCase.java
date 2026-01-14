@@ -24,8 +24,8 @@ public class CreateSubscriptionUseCase {
 
     public Mono<Subscription>execute(Subscription subscription){
         return validation(subscription)
-                .flatMap(s->gettingLocationValidated(s))
                 .flatMap(this::checkDuplicateSubscription)
+                .flatMap(s->gettingLocationValidated(s))
                 .flatMap(subscriptionGateway::save);
     }
 
