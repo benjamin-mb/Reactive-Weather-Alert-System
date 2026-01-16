@@ -4,4 +4,5 @@ import reactor.core.publisher.Mono;
 
 public interface PasswordEncoderGateway {
     public Mono<String> passwordEncode(String password);
+    public Mono<Boolean> comparePassword(String passwordToCheck, String password);
 }

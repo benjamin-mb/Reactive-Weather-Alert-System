@@ -16,4 +16,10 @@ public class PasswordEncoderImpl implements PasswordEncoderGateway {
         return Mono.fromCallable(()->passwordEncoder.encode(password))
                 .subscribeOn(Schedulers.boundedElastic());
     }
+
+    @Override
+    public Mono<Boolean> comparePassword(String passwordToCheck, String password) {
+         return Mono.fromCallable(()->passwordEncoder.matches(passwordToCheck,password))
+                 .subscribeOn(Schedulers.boundedElastic());
+    }
 }
